@@ -11,7 +11,13 @@ export const loginUser = async (credentials) => {
 };
 
 export const createBlock = async (blockData) => {
-  return await axios.post(`${API_URL}/block`, blockData);
+  try {
+    const response = await axios.post(`${API_URL}/blockchain/create`, blockData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating block:', error);
+    throw error; // Re-throw the error to handle it in the component
+  }
 };
 
 export const detectAnomalies = async () => {
